@@ -106,5 +106,6 @@ if Config and Config.Blips then
     end
     print(string.format('^2[ChiLLLix-Blip]^7 Configured %d blips', #Config.Blips))
 else
-    print('^1[ChiLLLix-Blip]^7 Error: Config not loaded properly')
+    print('^1[ChiLLLix-Blip]^7 Error: Config.Blips is nil or undefined')
+    print('^1[ChiLLLix-Blip]^7 Ensure config.lua is included in shared_scripts and properly formatted')
 end

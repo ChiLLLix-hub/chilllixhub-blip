@@ -5,7 +5,7 @@ local createdBlips = {}
 if Config.UseQBCore then
     Citizen.CreateThread(function()
         local retries = 0
-        local maxRetries = 20 -- 10 seconds total (20 * 500ms)
+        local maxRetries = 20 -- Total wait time: 20 retries * 500ms = 10 seconds
         while QBCore == nil and retries < maxRetries do
             TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
             retries = retries + 1
@@ -62,8 +62,9 @@ local function HandleBlipFlashing(blip, index)
         return
     end
     
-    -- Flash loop continues until blip is removed or hidden
-    -- Note: flashEnabled is checked once at start; dynamic changes require blip refresh
+    -- Flash loop: flashEnabled is checked at start only
+    -- Runtime config changes require calling refreshBlips to take effect
+    -- The loop will stop when the blip is removed, destroyed, or hidden
     Citizen.CreateThread(function()
         while true do
             local blipData = createdBlips[index]
