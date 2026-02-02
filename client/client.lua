@@ -51,17 +51,20 @@ local function CreateConfiguredBlip(blipConfig)
 end
 
 -- Function to handle blip flashing
-local function HandleBlipFlashing(blip, blipConfig)
+local function HandleBlipFlashing(blip, index)
+    local blipConfig = createdBlips[index].config
     if not blipConfig.flashEnabled or blipConfig.flashTimer <= 0 then
         return
     end
     
     Citizen.CreateThread(function()
-        while DoesBlipExist(blip) and not blipConfig.hideBlip do
+        while DoesBlipExist(blip) and createdBlips[index] and not createdBlips[index].config.hideBlip do
             SetBlipFlashes(blip, true)
             Citizen.Wait(blipConfig.flashTimer)
-            SetBlipFlashes(blip, false)
-            Citizen.Wait(blipConfig.flashTimer)
+            if DoesBlipExist(blip) and createdBlips[index] and not createdBlips[index].config.hideBlip then
+                SetBlipFlashes(blip, false)
+                Citizen.Wait(blipConfig.flashTimer)
+            end
         end
     end)
 end
@@ -75,7 +78,7 @@ local function InitializeBlips()
                 blip = blip,
                 config = blipConfig
             }
-            HandleBlipFlashing(blip, blipConfig)
+            HandleBlipFlashing(blip, index)
         end
     end
 end
@@ -113,7 +116,7 @@ local function UpdateBlipVisibility(index, hide)
                 local newBlip = CreateConfiguredBlip(blipData.config)
                 if newBlip then
                     blipData.blip = newBlip
-                    HandleBlipFlashing(newBlip, blipData.config)
+                    HandleBlipFlashing(newBlip, index)
                 end
             end
         end

@@ -145,16 +145,16 @@ Common colors:
 }
 ```
 
-### Example 3: Shop with Tick Mark
+### Example 3: Garage with Tick Mark
 ```lua
 {
-    name = "24-7 Shop",
-    blipId = 52,
-    coords = vector3(25.7, -1347.3, 29.5),
-    scale = 0.8,
-    color = 2,
-    opacity = 255,
-    shortRange = false,
+    name = "Garage",
+    blipId = 50,
+    coords = vector3(215.9, -810.1, 30.7),
+    scale = 0.7,
+    color = 5,
+    opacity = 200,
+    shortRange = true,
     flashTimer = 0,
     flashEnabled = false,
     tickOnBlip = true,
