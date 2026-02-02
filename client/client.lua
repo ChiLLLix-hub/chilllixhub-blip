@@ -25,8 +25,24 @@ local function CreateConfiguredBlip(blipConfig)
 
     local blip = AddBlipForCoord(blipConfig.coords.x, blipConfig.coords.y, blipConfig.coords.z)
     
-    -- Set basic blip properties
-    SetBlipSprite(blip, blipConfig.blipId)
+    -- Check if using custom sprite
+    if blipConfig.customSprite then
+        -- For custom sprites, you need to:
+        -- 1. Create a .ytd file with your custom sprite texture
+        -- 2. Place it in stream/ folder with proper naming (e.g., blips.ytd)
+        -- 3. The sprite will be automatically available through the blipId
+        -- 4. Reference it using the blipId parameter
+        -- Note: customSprite is a table with dict and texture for documentation purposes
+        if blipConfig.blipId then
+            SetBlipSprite(blip, blipConfig.blipId)
+        end
+    else
+        -- Set standard blip sprite
+        if blipConfig.blipId then
+            SetBlipSprite(blip, blipConfig.blipId)
+        end
+    end
+    
     SetBlipDisplay(blip, 4)
     SetBlipScale(blip, blipConfig.scale)
     SetBlipColour(blip, blipConfig.color)

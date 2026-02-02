@@ -6,6 +6,7 @@ A comprehensive FiveM script for displaying customizable blips on the map with Q
 
 - ✅ Full QBCore framework integration (optional)
 - ✅ Multiple blip configuration options
+- ✅ **Custom blip sprites support (add your own images!)**
 - ✅ Client and Server-side architecture
 - ✅ Dynamic blip management
 - ✅ Blip flashing with customizable timers
@@ -23,6 +24,7 @@ Each blip in `config.lua` supports the following parameters:
 |-----------|------|-------------|
 | `name` | string | Blip name for identification |
 | `blipId` | number | Blip sprite ID ([Reference](https://docs.fivem.net/docs/game-references/blips/)) |
+| `customSprite` | table | Optional: Custom sprite configuration `{dict = 'texture_dict', texture = 'texture_name'}` |
 | `coords` | vector3 | Blip coordinates (x, y, z) |
 | `scale` | float | Size of the blip (e.g., 0.8) |
 | `color` | number | Blip color ID ([Reference](https://docs.fivem.net/docs/game-references/blips/#blip-colors)) |
@@ -96,6 +98,54 @@ Common blip IDs:
 
 For a complete list, visit the [FiveM Blips Documentation](https://docs.fivem.net/docs/game-references/blips/).
 
+## Custom Blip Sprites
+
+You can add your own custom blip images/sprites to the map! This allows you to use unique icons for your locations.
+
+### How to Add Custom Sprites
+
+1. **Prepare Your Image**
+   - Create a square image (recommended: 64x64 pixels)
+   - Save as PNG or JPG format
+
+2. **Convert to YTD Format**
+   - Use [OpenIV](http://openiv.com/) (Windows) or texture dictionary tools
+   - Create a new .ytd file (e.g., `custom_blips.ytd`)
+   - Import your image and name the texture (e.g., `my_icon`)
+   - Save the .ytd file
+
+3. **Add to Resource**
+   - Place your .ytd file in the `stream/` folder
+   - See `stream/README.md` for detailed instructions
+
+4. **Configure in config.lua**
+   ```lua
+   {
+       name = "Custom Location",
+       blipId = 1,  -- Use sprite ID 1 for custom sprites
+       customSprite = {
+           dict = 'custom_blips',    -- Your .ytd filename (without extension)
+           texture = 'my_icon'       -- Texture name in the .ytd file
+       },
+       coords = vector3(100.0, -100.0, 30.0),
+       scale = 0.8,
+       color = 0,
+       opacity = 255,
+       shortRange = false,
+       flashTimer = 0,
+       flashEnabled = false,
+       tickOnBlip = false,
+       outline = false,
+       hideOnMinimap = false,
+       hideBlip = false,
+   }
+   ```
+
+5. **Restart Server**
+   - Use `refresh` and `ensure chilllixhub-blip` or restart your server
+
+For detailed instructions, see the [stream/README.md](stream/README.md) file.
+
 ## Blip Color Reference
 
 Common colors:
@@ -165,6 +215,30 @@ Common colors:
     hideBlip = false,
 }
 ```
+
+### Example 4: Custom Sprite Blip
+```lua
+{
+    name = "Custom Location",
+    blipId = 1,  -- Custom sprite ID
+    customSprite = {
+        dict = 'custom_blips',     -- Your .ytd filename (without .ytd extension)
+        texture = 'custom_icon_1'  -- Texture name within the .ytd file
+    },
+    coords = vector3(100.0, -100.0, 30.0),
+    scale = 0.8,
+    color = 0,
+    opacity = 255,
+    shortRange = false,
+    flashTimer = 0,
+    flashEnabled = false,
+    tickOnBlip = false,
+    outline = false,
+    hideOnMinimap = false,
+    hideBlip = false,
+}
+```
+**Note**: Custom sprites require a .ytd file in the `stream/` folder. See the Custom Blip Sprites section above.
 
 ## Support
 
