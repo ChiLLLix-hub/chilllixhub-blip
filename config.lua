@@ -3,20 +3,14 @@ Config = {}
 -- QBCore Framework Integration
 Config.UseQBCore = true -- Set to false if not using QBCore
 
--- Custom Blip Sprites Configuration
--- To use custom sprites, you need to:
--- 1. Create a .ytd texture dictionary file with your custom sprite
--- 2. Place it in the stream/ folder
--- 3. Use the customSprite option in blip config with texture dictionary and texture name
-Config.CustomSprites = {
-    -- Example custom sprite definition
-    -- ['customSpriteName'] = {
-    --     dict = 'custom_blips',  -- Name of your .ytd file (without extension)
-    --     texture = 'custom_icon' -- Texture name within the .ytd file
-    -- }
-}
-
 -- Blip Configuration
+-- To use custom sprites:
+-- 1. Create a .ytd texture dictionary file with your custom sprite image(s)
+-- 2. Place it in the stream/ folder
+-- 3. Use the customSprite parameter in your blip config (for documentation purposes)
+-- 4. Set blipId to reference your custom sprite ID
+-- See stream/README.md for detailed instructions
+
 Config.Blips = {
     -- Example Blip 1: Police Station
     {
@@ -100,9 +94,11 @@ Config.Blips = {
     },
     -- Example Blip 6: Custom Sprite Example (commented out by default)
     -- Uncomment and configure once you have custom sprites in stream/ folder
+    -- Note: customSprite parameter is for documentation only; blipId references your custom sprite
     -- {
     --     name = "Custom Location",
-    --     customSprite = {
+    --     blipId = 1,                    -- Set to your custom sprite ID
+    --     customSprite = {               -- Documentation: describes your custom sprite
     --         dict = 'custom_blips',     -- Your .ytd file name (without .ytd extension)
     --         texture = 'my_custom_icon' -- Texture name within the .ytd file
     --     },
