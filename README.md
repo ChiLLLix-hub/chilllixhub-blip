@@ -1,2 +1,183 @@
-# chilllixhub-blip
-Fivem script using QBCore for placing blip in player's map.
+# ChiLLLix-Blip
+
+A comprehensive FiveM script for displaying customizable blips on the map with QBCore framework support.
+
+## Features
+
+- ✅ Full QBCore framework integration (optional)
+- ✅ Multiple blip configuration options
+- ✅ Client and Server-side architecture
+- ✅ Dynamic blip management
+- ✅ Blip flashing with customizable timers
+- ✅ Short-range visibility control
+- ✅ Minimap visibility control
+- ✅ Blip opacity and scale customization
+- ✅ Tick marks and outlines
+- ✅ Admin commands for managing blips
+
+## Configuration Parameters
+
+Each blip in `config.lua` supports the following parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `name` | string | Blip name for identification |
+| `blipId` | number | Blip sprite ID ([Reference](https://docs.fivem.net/docs/game-references/blips/)) |
+| `coords` | vector3 | Blip coordinates (x, y, z) |
+| `scale` | float | Size of the blip (e.g., 0.8) |
+| `color` | number | Blip color ID ([Reference](https://docs.fivem.net/docs/game-references/blips/#blip-colors)) |
+| `opacity` | number | Blip opacity (0-255) |
+| `shortRange` | boolean | Enable short-range visibility only |
+| `flashTimer` | number | Flash interval in milliseconds (0 = disabled) |
+| `flashEnabled` | boolean | Enable/disable blip flashing |
+| `tickOnBlip` | boolean | Add tick mark on blip |
+| `outline` | boolean | Add outline to blip |
+| `hideOnMinimap` | boolean | Hide blip on minimap |
+| `hideBlip` | boolean | Hide blip from map entirely |
+
+## Installation
+
+1. Download or clone this repository
+2. Place the `chilllixhub-blip` folder in your FiveM server's `resources` folder
+3. Add `ensure chilllixhub-blip` to your `server.cfg`
+4. Configure your blips in `config.lua`
+5. Restart your server or use `refresh` and `start chilllixhub-blip`
+
+## Configuration
+
+Edit `config.lua` to customize your blips:
+
+```lua
+Config = {}
+
+Config.UseQBCore = true -- Set to false if not using QBCore
+
+Config.Blips = {
+    {
+        name = "Police Station",
+        blipId = 60,
+        coords = vector3(425.1, -979.5, 30.7),
+        scale = 0.8,
+        color = 29,
+        opacity = 255,
+        shortRange = true,
+        flashTimer = 0,
+        flashEnabled = false,
+        tickOnBlip = false,
+        outline = false,
+        hideOnMinimap = false,
+        hideBlip = false,
+    },
+    -- Add more blips here...
+}
+```
+
+## Commands
+
+### Admin Commands
+
+- `/refreshblips` - Refresh all blips for all players
+- `/toggleblip <index> <true/false>` - Toggle visibility of a specific blip
+  - The blip index corresponds to its position in the Config.Blips array (1-based)
+  - Example: `/toggleblip 1 true` will hide the first blip in the config
+
+**Note:** These commands require admin permissions when using QBCore, or ACE permissions without QBCore.
+
+## Blip ID Reference
+
+Common blip IDs:
+- `1` - Default
+- `50` - Garage
+- `52` - Shop
+- `60` - Police
+- `61` - Hospital
+- `108` - ATM
+- `280` - Custom marker
+
+For a complete list, visit the [FiveM Blips Documentation](https://docs.fivem.net/docs/game-references/blips/).
+
+## Blip Color Reference
+
+Common colors:
+- `0` - White
+- `1` - Red
+- `2` - Green
+- `3` - Blue
+- `5` - Yellow
+- `29` - Police Blue
+- `47` - Pink
+
+## Examples
+
+### Example 1: Police Station with Short Range
+```lua
+{
+    name = "Police Station",
+    blipId = 60,
+    coords = vector3(425.1, -979.5, 30.7),
+    scale = 0.8,
+    color = 29,
+    opacity = 255,
+    shortRange = true,
+    flashTimer = 0,
+    flashEnabled = false,
+    tickOnBlip = false,
+    outline = false,
+    hideOnMinimap = false,
+    hideBlip = false,
+}
+```
+
+### Example 2: Flashing ATM with Outline
+```lua
+{
+    name = "ATM",
+    blipId = 108,
+    coords = vector3(147.4, -1035.8, 29.3),
+    scale = 0.6,
+    color = 2,
+    opacity = 255,
+    shortRange = true,
+    flashTimer = 5000,  -- Flash every 5 seconds
+    flashEnabled = true,
+    tickOnBlip = false,
+    outline = true,
+    hideOnMinimap = false,
+    hideBlip = false,
+}
+```
+
+### Example 3: Garage with Tick Mark
+```lua
+{
+    name = "Garage",
+    blipId = 50,
+    coords = vector3(215.9, -810.1, 30.7),
+    scale = 0.7,
+    color = 5,
+    opacity = 200,
+    shortRange = true,
+    flashTimer = 0,
+    flashEnabled = false,
+    tickOnBlip = true,
+    outline = false,
+    hideOnMinimap = false,
+    hideBlip = false,
+}
+```
+
+## Support
+
+For issues, suggestions, or contributions, please visit the [GitHub repository](https://github.com/ChiLLLix-hub/chilllixhub-blip).
+
+## License
+
+This project is licensed under the terms specified in the LICENSE file.
+
+## Credits
+
+Created by ChiLLLix-hub
+
+---
+
+**Note:** This script is compatible with both QBCore and standalone FiveM servers. Simply set `Config.UseQBCore` to `false` if not using QBCore framework.
