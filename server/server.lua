@@ -84,7 +84,17 @@ end, false)
 
 -- Event to get all blip configurations (for potential UI/admin panel)
 RegisterNetEvent('chilllixhub-blip:server:getBlipConfigs', function()
-    TriggerClientEvent('chilllixhub-blip:client:receiveBlipConfigs', source, Config.Blips)
+    -- Check permissions before sending config data
+    if Config.UseQBCore and QBCore then
+        local Player = QBCore.Functions.GetPlayer(source)
+        if Player and QBCore.Functions.HasPermission(source, 'admin') then
+            TriggerClientEvent('chilllixhub-blip:client:receiveBlipConfigs', source, Config.Blips)
+        end
+    else
+        if IsPlayerAceAllowed(source, 'command.refreshblips') then
+            TriggerClientEvent('chilllixhub-blip:client:receiveBlipConfigs', source, Config.Blips)
+        end
+    end
 end)
 
 -- Print startup message

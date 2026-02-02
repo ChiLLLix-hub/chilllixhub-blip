@@ -78,6 +78,8 @@ Config.Blips = {
 
 - `/refreshblips` - Refresh all blips for all players
 - `/toggleblip <index> <true/false>` - Toggle visibility of a specific blip
+  - The blip index corresponds to its position in the Config.Blips array (1-based)
+  - Example: `/toggleblip 1 true` will hide the first blip in the config
 
 **Note:** These commands require admin permissions when using QBCore, or ACE permissions without QBCore.
 

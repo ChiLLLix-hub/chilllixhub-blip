@@ -6,7 +6,7 @@ if Config.UseQBCore then
     Citizen.CreateThread(function()
         while QBCore == nil do
             TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
-            Citizen.Wait(200)
+            Citizen.Wait(500)
         end
     end)
 end
@@ -56,6 +56,8 @@ local function HandleBlipFlashing(blip, index)
         return
     end
     
+    -- Flash loop continues until blip is removed or hidden
+    -- Note: flashEnabled is checked once at start; dynamic changes require blip refresh
     Citizen.CreateThread(function()
         while true do
             local blipData = createdBlips[index]
