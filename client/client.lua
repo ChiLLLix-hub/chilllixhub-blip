@@ -81,7 +81,7 @@ local function InitializeBlips()
 end
 
 -- Function to remove a specific blip
-local function RemoveBlip(index)
+local function RemoveBlipByIndex(index)
     if createdBlips[index] and DoesBlipExist(createdBlips[index].blip) then
         RemoveBlip(createdBlips[index].blip)
         createdBlips[index] = nil
@@ -134,7 +134,7 @@ end)
 
 -- Event to remove specific blip
 RegisterNetEvent('chilllixhub-blip:client:removeBlip', function(index)
-    RemoveBlip(index)
+    RemoveBlipByIndex(index)
 end)
 
 -- Initialize blips when resource starts

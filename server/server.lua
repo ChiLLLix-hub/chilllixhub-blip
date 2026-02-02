@@ -5,6 +5,16 @@ if Config.UseQBCore then
     QBCore = exports['qb-core']:GetCoreObject()
 end
 
+-- Helper function to send chat message
+local function SendChatMessage(source, message, color)
+    color = color or {0, 255, 0}
+    TriggerClientEvent('chat:addMessage', source, {
+        color = color,
+        multiline = true,
+        args = {"[ChiLLLix-Blip]", message}
+    })
+end
+
 -- Server-side command to refresh all blips for all players
 RegisterCommand('refreshblips', function(source, args, rawCommand)
     if source == 0 then
@@ -25,17 +35,9 @@ RegisterCommand('refreshblips', function(source, args, rawCommand)
             -- Without QBCore, allow any player (you can add your own permission check)
             if IsPlayerAceAllowed(source, 'command.refreshblips') then
                 TriggerClientEvent('chilllixhub-blip:client:refreshBlips', -1)
-                TriggerClientEvent('chat:addMessage', source, {
-                    color = {0, 255, 0},
-                    multiline = true,
-                    args = {"[ChiLLLix-Blip]", "All blips refreshed"}
-                })
+                SendChatMessage(source, 'All blips refreshed')
             else
-                TriggerClientEvent('chat:addMessage', source, {
-                    color = {255, 0, 0},
-                    multiline = true,
-                    args = {"[ChiLLLix-Blip]", "No permission"}
-                })
+                SendChatMessage(source, 'No permission', {255, 0, 0})
             end
         end
     end
@@ -50,11 +52,7 @@ RegisterCommand('toggleblip', function(source, args, rawCommand)
         if source == 0 then
             print('^1[ChiLLLix-Blip]^7 Usage: toggleblip <index> <true/false>')
         else
-            TriggerClientEvent('chat:addMessage', source, {
-                color = {255, 0, 0},
-                multiline = true,
-                args = {"[ChiLLLix-Blip]", "Usage: /toggleblip <index> <true/false>"}
-            })
+            SendChatMessage(source, 'Usage: /toggleblip <index> <true/false>', {255, 0, 0})
         end
         return
     end
@@ -76,17 +74,9 @@ RegisterCommand('toggleblip', function(source, args, rawCommand)
         else
             if IsPlayerAceAllowed(source, 'command.toggleblip') then
                 TriggerClientEvent('chilllixhub-blip:client:toggleBlip', -1, blipIndex, hideBlip)
-                TriggerClientEvent('chat:addMessage', source, {
-                    color = {0, 255, 0},
-                    multiline = true,
-                    args = {"[ChiLLLix-Blip]", string.format('Blip %d toggled', blipIndex)}
-                })
+                SendChatMessage(source, string.format('Blip %d toggled', blipIndex))
             else
-                TriggerClientEvent('chat:addMessage', source, {
-                    color = {255, 0, 0},
-                    multiline = true,
-                    args = {"[ChiLLLix-Blip]", "No permission"}
-                })
+                SendChatMessage(source, 'No permission', {255, 0, 0})
             end
         end
     end
