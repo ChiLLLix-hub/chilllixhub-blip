@@ -4,9 +4,15 @@ local createdBlips = {}
 -- Initialize QBCore if enabled
 if Config.UseQBCore then
     Citizen.CreateThread(function()
-        while QBCore == nil do
+        local retries = 0
+        local maxRetries = 20 -- 10 seconds total (20 * 500ms)
+        while QBCore == nil and retries < maxRetries do
             TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+            retries = retries + 1
             Citizen.Wait(500)
+        end
+        if not QBCore then
+            print('^1[ChiLLLix-Blip]^7 Warning: Failed to load QBCore after 10 seconds')
         end
     end)
 end

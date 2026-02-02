@@ -98,9 +98,13 @@ RegisterNetEvent('chilllixhub-blip:server:getBlipConfigs', function()
 end)
 
 -- Print startup message
-if Config.UseQBCore then
-    print('^2[ChiLLLix-Blip]^7 Server-side loaded with QBCore integration')
+if Config and Config.Blips then
+    if Config.UseQBCore then
+        print('^2[ChiLLLix-Blip]^7 Server-side loaded with QBCore integration')
+    else
+        print('^2[ChiLLLix-Blip]^7 Server-side loaded')
+    end
+    print(string.format('^2[ChiLLLix-Blip]^7 Configured %d blips', #Config.Blips))
 else
-    print('^2[ChiLLLix-Blip]^7 Server-side loaded')
+    print('^1[ChiLLLix-Blip]^7 Error: Config not loaded properly')
 end
-print(string.format('^2[ChiLLLix-Blip]^7 Configured %d blips', #Config.Blips))
