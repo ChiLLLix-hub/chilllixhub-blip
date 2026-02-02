@@ -94,11 +94,12 @@ Config.Blips = {
     },
     -- Example Blip 6: Custom Sprite Example (commented out by default)
     -- Uncomment and configure once you have custom sprites in stream/ folder
-    -- Note: customSprite parameter is for documentation only; blipId references your custom sprite
+    -- Note: customSprite parameter is for documentation only to track your texture files
+    -- The blipId references your custom sprite (requires proper .ytd setup and ID mapping)
     -- {
     --     name = "Custom Location",
-    --     blipId = 1,                    -- Set to your custom sprite ID
-    --     customSprite = {               -- Documentation: describes your custom sprite
+    --     blipId = 1,                    -- Set to an appropriate sprite ID for your custom texture
+    --     customSprite = {               -- Documentation: track your custom sprite details
     --         dict = 'custom_blips',     -- Your .ytd file name (without .ytd extension)
     --         texture = 'my_custom_icon' -- Texture name within the .ytd file
     --     },

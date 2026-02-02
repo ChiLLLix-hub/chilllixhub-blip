@@ -24,7 +24,7 @@ Each blip in `config.lua` supports the following parameters:
 |-----------|------|-------------|
 | `name` | string | Blip name for identification |
 | `blipId` | number | Blip sprite ID ([Reference](https://docs.fivem.net/docs/game-references/blips/)) |
-| `customSprite` | table | Optional: Custom sprite configuration `{dict = 'texture_dict', texture = 'texture_name'}` |
+| `customSprite` | table | Optional: Custom sprite reference for documentation `{dict = 'texture_dict', texture = 'texture_name'}` (not processed by code, helps track custom textures) |
 | `coords` | vector3 | Blip coordinates (x, y, z) |
 | `scale` | float | Size of the blip (e.g., 0.8) |
 | `color` | number | Blip color ID ([Reference](https://docs.fivem.net/docs/game-references/blips/#blip-colors)) |
@@ -122,7 +122,7 @@ You can add your own custom blip images/sprites to the map! This allows you to u
    ```lua
    {
        name = "Custom Location",
-       blipId = 1,  -- Use sprite ID 1 for custom sprites
+       blipId = 1,  -- Use a custom sprite ID (research available IDs or use modding tools)
        customSprite = {
            dict = 'custom_blips',    -- Your .ytd filename (without extension)
            texture = 'my_icon'       -- Texture name in the .ytd file
@@ -145,6 +145,8 @@ You can add your own custom blip images/sprites to the map! This allows you to u
    - Use `refresh` and `ensure chilllixhub-blip` or restart your server
 
 For detailed instructions, see the [stream/README.md](stream/README.md) file.
+
+**Note**: Custom blip sprites in FiveM require texture dictionaries (.ytd files) and understanding of GTA V's sprite system. The `customSprite` parameter in the configuration is for documentation purposes to help you track which texture corresponds to which sprite ID. You'll need to use modding tools to properly map sprite IDs to your custom textures.
 
 ## Blip Color Reference
 
@@ -220,10 +222,10 @@ Common colors:
 ```lua
 {
     name = "Custom Location",
-    blipId = 1,  -- Custom sprite ID
+    blipId = 1,  -- Custom sprite ID (use appropriate ID for your custom sprite)
     customSprite = {
-        dict = 'custom_blips',     -- Your .ytd filename (without .ytd extension)
-        texture = 'custom_icon_1'  -- Texture name within the .ytd file
+        dict = 'custom_blips',     -- Your .ytd filename (documentation only)
+        texture = 'custom_icon_1'  -- Texture name (documentation only)
     },
     coords = vector3(100.0, -100.0, 30.0),
     scale = 0.8,
@@ -238,7 +240,7 @@ Common colors:
     hideBlip = false,
 }
 ```
-**Note**: Custom sprites require a .ytd file in the `stream/` folder. See the Custom Blip Sprites section above.
+**Note**: Custom sprites require a .ytd file in the `stream/` folder and proper sprite ID mapping. The `customSprite` parameter is for documentation to track your texture files. See the Custom Blip Sprites section above for detailed instructions.
 
 ## Support
 

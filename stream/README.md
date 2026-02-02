@@ -35,10 +35,10 @@ Once you have your .ytd file in the stream folder:
 ```lua
 {
     name = "Custom Location",
-    blipId = 1,  -- Use a custom sprite ID (typically 1 for custom sprites)
+    blipId = 1,  -- Use an appropriate sprite ID for your custom sprite
     customSprite = {
-        dict = 'custom_blips',     -- Name of your .ytd file (without .ytd extension)
-        texture = 'custom_icon_1'  -- Texture name within the .ytd file
+        dict = 'custom_blips',     -- Name of your .ytd file (for documentation)
+        texture = 'custom_icon_1'  -- Texture name (for documentation)
     },
     coords = vector3(100.0, -100.0, 30.0),
     scale = 0.8,
@@ -56,15 +56,21 @@ Once you have your .ytd file in the stream folder:
 
 ### Important Notes
 
-1. **File Naming**: The .ytd filename should match the `dict` value in your config (e.g., `custom_blips.ytd` → `dict = 'custom_blips'`)
+1. **File Naming**: The .ytd filename should match the `dict` value in your customSprite config (for your reference)
 
-2. **Texture Names**: The texture name inside the .ytd file should match the `texture` value in your config
+2. **Texture Names**: Keep track of texture names inside the .ytd file using the `texture` value in customSprite
 
-3. **Sprite IDs**: When using custom sprites, the `blipId` should be set to 1 (or another appropriate custom sprite ID)
+3. **Sprite IDs**: Custom sprites in FiveM require proper sprite ID mapping. The relationship between `blipId` and custom textures depends on how the .ytd file is structured and your FiveM setup. You may need to:
+   - Research available/unused sprite IDs in GTA V
+   - Use modding tools to properly register custom sprite IDs
+   - Test different sprite IDs to find which ones work with your custom textures
+   - Note: Not all sprite IDs may display custom textures correctly
 
-4. **File Format**: Only .ytd files are supported for custom blip sprites in FiveM
+4. **customSprite Parameter**: The `customSprite` parameter in the config is for documentation purposes only - it helps you track which .ytd file and texture corresponds to which blip. The actual sprite is loaded through the `blipId` parameter.
 
-5. **Server Restart**: After adding new .ytd files, restart your server or use `refresh` and `ensure chilllixhub-blip`
+5. **File Format**: Only .ytd files are supported for custom blip sprites in FiveM
+
+6. **Server Restart**: After adding new .ytd files, restart your server or use `refresh` and `ensure chilllixhub-blip`
 
 ## Example Structure
 
