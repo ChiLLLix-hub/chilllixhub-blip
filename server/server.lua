@@ -84,7 +84,6 @@ end, false)
 
 -- Event to get all blip configurations (for potential UI/admin panel)
 RegisterNetEvent('chilllixhub-blip:server:getBlipConfigs', function()
-    local source = source
     TriggerClientEvent('chilllixhub-blip:client:receiveBlipConfigs', source, Config.Blips)
 end)
 

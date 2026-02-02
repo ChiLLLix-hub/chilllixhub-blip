@@ -52,19 +52,27 @@ end
 
 -- Function to handle blip flashing
 local function HandleBlipFlashing(blip, index)
-    local blipConfig = createdBlips[index].config
-    if not blipConfig.flashEnabled or blipConfig.flashTimer <= 0 then
+    if not createdBlips[index] or not createdBlips[index].config.flashEnabled or createdBlips[index].config.flashTimer <= 0 then
         return
     end
     
     Citizen.CreateThread(function()
-        while DoesBlipExist(blip) and createdBlips[index] and not createdBlips[index].config.hideBlip do
-            SetBlipFlashes(blip, true)
-            Citizen.Wait(blipConfig.flashTimer)
-            if DoesBlipExist(blip) and createdBlips[index] and not createdBlips[index].config.hideBlip then
-                SetBlipFlashes(blip, false)
-                Citizen.Wait(blipConfig.flashTimer)
+        while true do
+            local blipData = createdBlips[index]
+            if not blipData or not DoesBlipExist(blip) or blipData.config.hideBlip then
+                break
             end
+            
+            SetBlipFlashes(blip, true)
+            Citizen.Wait(blipData.config.flashTimer)
+            
+            blipData = createdBlips[index]
+            if not blipData or not DoesBlipExist(blip) or blipData.config.hideBlip then
+                break
+            end
+            
+            SetBlipFlashes(blip, false)
+            Citizen.Wait(blipData.config.flashTimer)
         end
     end)
 end
@@ -106,12 +114,12 @@ local function UpdateBlipVisibility(index, hide)
     if createdBlips[index] then
         local blipData = createdBlips[index]
         if hide then
-            if blipData.blip and DoesBlipExist(blipData.blip) then
+            if DoesBlipExist(blipData.blip) then
                 RemoveBlip(blipData.blip)
                 blipData.blip = nil
             end
         else
-            if not blipData.blip or not DoesBlipExist(blipData.blip) then
+            if not DoesBlipExist(blipData.blip) then
                 blipData.config.hideBlip = false
                 local newBlip = CreateConfiguredBlip(blipData.config)
                 if newBlip then
