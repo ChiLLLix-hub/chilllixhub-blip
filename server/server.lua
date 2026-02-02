@@ -88,10 +88,9 @@ RegisterNetEvent('chilllixhub-blip:server:getBlipConfigs', function()
 end)
 
 -- Print startup message
-local blipCount = #Config.Blips
 if Config.UseQBCore then
     print('^2[ChiLLLix-Blip]^7 Server-side loaded with QBCore integration')
 else
     print('^2[ChiLLLix-Blip]^7 Server-side loaded')
 end
-print(string.format('^2[ChiLLLix-Blip]^7 Configured %d blips', blipCount))
+print(string.format('^2[ChiLLLix-Blip]^7 Configured %d blips', #Config.Blips))
