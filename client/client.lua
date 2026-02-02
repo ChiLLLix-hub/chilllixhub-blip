@@ -103,12 +103,12 @@ local function UpdateBlipVisibility(index, hide)
     if createdBlips[index] then
         local blipData = createdBlips[index]
         if hide then
-            if DoesBlipExist(blipData.blip) then
+            if blipData.blip and DoesBlipExist(blipData.blip) then
                 RemoveBlip(blipData.blip)
                 blipData.blip = nil
             end
         else
-            if not DoesBlipExist(blipData.blip) then
+            if not blipData.blip or not DoesBlipExist(blipData.blip) then
                 blipData.config.hideBlip = false
                 local newBlip = CreateConfiguredBlip(blipData.config)
                 if newBlip then

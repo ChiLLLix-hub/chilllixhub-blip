@@ -148,7 +148,7 @@ Common colors:
 ### Example 3: Shop with Tick Mark
 ```lua
 {
-    name = "24/7 Shop",
+    name = "24-7 Shop",
     blipId = 52,
     coords = vector3(25.7, -1347.3, 29.5),
     scale = 0.8,
