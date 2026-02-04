@@ -3,18 +3,7 @@ local createdBlips = {}
 
 -- Initialize QBCore if enabled
 if Config.UseQBCore then
-    Citizen.CreateThread(function()
-        local retries = 0
-        local maxRetries = 20 -- Total wait time: 20 retries * 500ms = 10 seconds
-        while QBCore == nil and retries < maxRetries do
-            TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
-            retries = retries + 1
-            Citizen.Wait(500)
-        end
-        if not QBCore then
-            print('^1[ChiLLLix-Blip]^7 Warning: Failed to load QBCore after 10 seconds')
-        end
-    end)
+    QBCore = exports['qb-core']:GetCoreObject()
 end
 
 -- Function to create a blip with all configuration options
@@ -159,11 +148,6 @@ end)
 
 -- Initialize blips when resource starts
 Citizen.CreateThread(function()
-    -- Wait a bit for QBCore to load if enabled
-    if Config.UseQBCore then
-        Citizen.Wait(1000)
-    end
-    
     InitializeBlips()
     
     if Config.UseQBCore and QBCore then
