@@ -2,7 +2,14 @@ local QBCore = nil
 
 -- Initialize QBCore if enabled
 if Config.UseQBCore then
-    QBCore = exports['qb-core']:GetCoreObject()
+    local success, result = pcall(function()
+        return exports['qb-core']:GetCoreObject()
+    end)
+    if success then
+        QBCore = result
+    else
+        print('^1[ChiLLLix-Blip]^7 Warning: Failed to load QBCore - Make sure qb-core is started before this resource')
+    end
 end
 
 -- Helper function to send chat message
